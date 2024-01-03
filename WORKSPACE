@@ -10,15 +10,13 @@ http_archive(
     ],
 )
 
-# See https://github.com/bazelbuild/rules_scala/releases for up to date version information.
-rules_scala_version = "c711b4d1f0d1cc386c63ef748c9df14d2f3a187e"
+load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
 http_archive(
     name = "io_bazel_rules_scala",
-    sha256 = "556677f505634da64efc41912d280895e61f5da109d82bdee41cde4120a190a1",
-    strip_prefix = "rules_scala-%s" % rules_scala_version,
-    type = "zip",
-    url = "https://github.com/bazelbuild/rules_scala/archive/%s.zip" % rules_scala_version,
+    sha256 = "9a23058a36183a556a9ba7229b4f204d3e68c8c6eb7b28260521016b38ef4e00",
+    strip_prefix = "rules_scala-6.4.0",
+    url = "https://github.com/bazelbuild/rules_scala/releases/download/v6.4.0/rules_scala-v6.4.0.tar.gz",
 )
 
 load("@io_bazel_rules_scala//:scala_config.bzl", "scala_config")
@@ -30,7 +28,7 @@ load("@io_bazel_rules_scala//:scala_config.bzl", "scala_config")
 #   3.2 should be supported on master. Please note that Scala artifacts for version (3.2.2) are not defined in
 #   Rules Scala, they need to be provided by your WORKSPACE. You can use external loader like
 #   https://github.com/bazelbuild/rules_jvm_external
-scala_config(scala_version = "2.13.6")
+scala_config(scala_version = "2.13.12")
 
 load("@io_bazel_rules_scala//scala:scala.bzl", "rules_scala_setup", "rules_scala_toolchain_deps_repositories")
 
@@ -76,6 +74,15 @@ maven_install(
         "com.softwaremill.sttp.client3:core_2.13:3.3.15",
         "com.softwaremill.sttp.client3:circe_2.13:3.3.15",
         "io.circe:circe-generic_2.13:0.14.1",
+        "com.lihaoyi:requests_2.13:0.8.0",
+        "com.lihaoyi:ujson_2.13:3.1.3",
+        "com.lihaoyi:upickle-core_2.13:3.1.3",
+        "com.lihaoyi:geny_2.13:1.0.0",
+        "org.typelevel:cats-core_2.13:2.6.1",
+        "org.typelevel:cats-effect_2.13:3.2.9",
+        "com.typesafe.akka:akka-http_2.13:10.2.7",
+        "com.typesafe.akka:akka-stream_2.13:2.6.18",
+        "com.typesafe.akka:akka-http-spray-json_2.13:10.2.7",
     ],
     repositories = [
         "https://repo1.maven.org/maven2",
